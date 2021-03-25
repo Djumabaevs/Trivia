@@ -27,7 +27,10 @@ public class Repository {
                 response -> {
             for(int i = 0; i < response.length(); i++) {
                 try {
+                    Question question = new Question(response.getJSONArray(i).get(0).toString(),
+                            response.getJSONArray(i).getBoolean(1));
                     Log.d("Tags", "OnCreate: " + response.getJSONArray(i).get(0));
+                    questionArrayList.add(question);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
