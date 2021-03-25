@@ -16,8 +16,6 @@ public class AppController extends Application {
 
     private static AppController instance;
     private RequestQueue requestQueue;
-    private ImageLoader imageLoader;
-    private static Context ctx;
 
   /*  private AppController (Context context) {
         ctx = context;
@@ -39,7 +37,7 @@ public class AppController extends Application {
             }
         });
     }*/
-    public static synchronized AppController getInstance(/*Context context*/) {
+    public static synchronized AppController getInstance() {
      /*   if (instance == null) {
             instance = new AppController(context);
         }*/
@@ -47,16 +45,13 @@ public class AppController extends Application {
     }
     public RequestQueue getRequestQueue() {
         if (requestQueue == null) {
-            requestQueue = Volley.newRequestQueue(ctx.getApplicationContext());
+            requestQueue = Volley.newRequestQueue(getApplicationContext());
         }
         return requestQueue;
     }
     public <T> void addToRequestQueue (Request<T> req) {
         getRequestQueue().add(req);
     }
-   /* public ImageLoader getImageLoader() {
-        return imageLoader;
-    }*/
 
     @Override
     public void onCreate() {
