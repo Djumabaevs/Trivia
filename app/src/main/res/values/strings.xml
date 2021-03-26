@@ -3,4 +3,7 @@
     <string name="title_text">Trivia</string>
     <string name="Text">text_question</string>
     <string name="text">Question 45/78</string>
+    <string name="button_true">TRUE</string>
+    <string name="button_false">FALSE</string>
+    <string name="button_next">Next</string>
 </resources>
