@@ -6,4 +6,5 @@
     <string name="button_true">TRUE</string>
     <string name="button_false">FALSE</string>
     <string name="button_next">Next</string>
+    <string name="placeholder">Hello everyone! i am the luckiest software engineer i the world!</string>
 </resources>

@@ -2,4 +2,5 @@
 <resources>
     <dimen name="button_margin">10dp</dimen>
     <dimen name="button_padding">6dp</dimen>
+    <dimen name="question_padding">8dp</dimen>
 </resources>
