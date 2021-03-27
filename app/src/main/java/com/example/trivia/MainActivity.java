@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity  {
     private int currentQuestionIndex = 0;
     List<Question> questions;
 
-    private int scoreCounter = 100;
+    private int scoreCounter = 0;
     private Score score;
 
     @Override
@@ -81,6 +81,7 @@ public class MainActivity extends AppCompatActivity  {
         } else {
             snackMessageId  =R.string.incorrect_answer;
             shakeAnimation();
+            deductPoints();
         }
         Snackbar.make(binding.cardView, snackMessageId, Snackbar.LENGTH_SHORT).show();
     }
@@ -146,7 +147,20 @@ public class MainActivity extends AppCompatActivity  {
     }
 
     private void addPoints() {
-        scoreCounter += scoreCounter;
-        Log.d("Score", "Score points: " + scoreCounter);
+        scoreCounter += 100;
+        score.setScore(scoreCounter);
+        Log.d("Score", "Score points: " + score.getScore());
+    }
+
+    private void deductPoints() {
+        scoreCounter -= 100;
+        if(scoreCounter > 0) {
+            score.setScore(scoreCounter);
+            Log.d("Deduct2", "Loose points: " + score.getScore());
+        } else {
+            scoreCounter = 0;
+            score.setScore(scoreCounter);
+            Log.d("Deduct", "Loose points: " + score.getScore());
+        }
     }
 }
