@@ -37,6 +37,8 @@ public class MainActivity extends AppCompatActivity  {
 
         List<Question> questionsFirst = new Repository().getQuestions(questionArrayList ->
                 Log.d("Main", "onCreate: " + questionArrayList));
+
+
         questions = new Repository().getQuestions(listOfQuestions -> {
 
                 binding.questionTextView.setText(listOfQuestions.get(currentQuestionIndex).getAnswer());
@@ -51,12 +53,14 @@ public class MainActivity extends AppCompatActivity  {
         binding.buttonTrue.setOnClickListener(view -> {
 
             checkAnswer(true);
+            updateQuestion();
 
         });
         binding.buttonFalse.setOnClickListener(view -> {
 
             checkAnswer(false);
-            shakeAnimation();
+            updateQuestion();
+
 
         });
 
@@ -69,6 +73,7 @@ public class MainActivity extends AppCompatActivity  {
             snackMessageId = R.string.correct_answer;
         } else {
             snackMessageId  =R.string.incorrect_answer;
+            shakeAnimation();
         }
         Snackbar.make(binding.cardView, snackMessageId, Snackbar.LENGTH_SHORT).show();
     }
@@ -87,6 +92,9 @@ public class MainActivity extends AppCompatActivity  {
         Animation shake = AnimationUtils.loadAnimation(MainActivity.this,
                 R.anim.shake_animation);
         binding.cardView.setAnimation(shake);
+
+
+
     }
 
 }

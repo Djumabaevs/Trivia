@@ -3,9 +3,10 @@
     android:fromDegrees="30"
     android:pivotX="30%"
     android:pivotY="30%"
-    android:duration="300"
+    android:duration="150"
     android:repeatCount="1"
     android:repeatMode="reverse"
     android:toDegrees="10"
     />
+
 
