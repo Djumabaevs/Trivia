@@ -16,6 +16,7 @@ import com.example.trivia.data.AnswerListAsyncResponse;
 import com.example.trivia.data.Repository;
 import com.example.trivia.databinding.ActivityMainBinding;
 import com.example.trivia.model.Question;
+import com.example.trivia.model.Score;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
@@ -27,11 +28,15 @@ public class MainActivity extends AppCompatActivity  {
     private int currentQuestionIndex = 0;
     List<Question> questions;
 
+    private int scoreCounter = 100;
+    private Score score;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        score = new Score();
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
@@ -62,10 +67,7 @@ public class MainActivity extends AppCompatActivity  {
 
             checkAnswer(false);
             updateQuestion();
-
-
         });
-
     }
 
     private void checkAnswer(boolean userChooseCorrect) {
@@ -74,6 +76,8 @@ public class MainActivity extends AppCompatActivity  {
         if(userChooseCorrect == answer) {
             snackMessageId = R.string.correct_answer;
             fadeAnimation();
+            addPoints();
+
         } else {
             snackMessageId  =R.string.incorrect_answer;
             shakeAnimation();
@@ -141,4 +145,8 @@ public class MainActivity extends AppCompatActivity  {
         });
     }
 
+    private void addPoints() {
+        scoreCounter += scoreCounter;
+        Log.d("Score", "Score points: " + scoreCounter);
+    }
 }
