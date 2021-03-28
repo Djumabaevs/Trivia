@@ -150,6 +150,7 @@ public class MainActivity extends AppCompatActivity  {
         scoreCounter += 100;
         score.setScore(scoreCounter);
         Log.d("Score", "Score points: " + score.getScore());
+        binding.scoreText.setText(String.valueOf(score.getScore()));
     }
 
     private void deductPoints() {
