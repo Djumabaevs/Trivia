@@ -8,8 +8,6 @@
     <string name="correct_answer" >correct</string>
     <string name="incorrect_answer" >incorrect</string>
     <string name="button_next">Next</string>
-    <string name="placeholder">Hello everyone! i am the luckiest software engineer i the world!</string>
     <string name="textQuestion">Question: %d/%d</string>
-    <string name="text_view_make">Questions loading...</string>
-    <string name="scores">Scores...</string>
+    <string name="text_view_make">Questions loading…</string>
 </resources>
