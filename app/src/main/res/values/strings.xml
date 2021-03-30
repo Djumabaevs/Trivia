@@ -5,8 +5,8 @@
     <string name="text">Question 45/78</string>
     <string name="button_true">TRUE</string>
     <string name="button_false">FALSE</string>
-    <string name="correct_answer" >correct</string>
-    <string name="incorrect_answer" >incorrect</string>
+    <string name="correct_answer" >Correct!</string>
+    <string name="incorrect">Incorrect</string>
     <string name="button_next">Next</string>
     <string name="textQuestion">Question: %d/%d</string>
     <string name="text_view_make">Questions loading…</string>

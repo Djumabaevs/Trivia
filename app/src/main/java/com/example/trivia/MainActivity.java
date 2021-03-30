@@ -10,8 +10,9 @@ import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.animation.BounceInterpolator;
 
-import com.example.trivia.data.AnswerListAsuncResponse;
+
 import com.example.trivia.data.AnswerListAsyncResponse;
 import com.example.trivia.data.Repository;
 import com.example.trivia.databinding.ActivityMainBinding;
@@ -41,11 +42,8 @@ public class MainActivity extends AppCompatActivity  {
 
         score = new Score();
 
-        binding.scoreText.setText(MessageFormat.format("Current score: {0}", String.valueOf(score.getScore())));
-/*
-        List<Question> questionsFirst = new Repository().getQuestions(questionArrayList ->
-                Log.d("Main", "onCreate: " + questionArrayList));*/
-
+        binding.scoreText.setText(MessageFormat.format("Current score: {0}",
+                String.valueOf(score.getScore())));
 
         questions = new Repository().getQuestions(listOfQuestions -> {
 
@@ -73,20 +71,21 @@ public class MainActivity extends AppCompatActivity  {
         });
     }
 
-    private void checkAnswer(boolean userChooseCorrect) {
+    private void checkAnswer(boolean userChoseCorrect) {
         boolean answer = questions.get(currentQuestionIndex).getAnswerTrue();
         int snackMessageId = 0;
-        if(userChooseCorrect == answer) {
+        if (userChoseCorrect == answer) {
             snackMessageId = R.string.correct_answer;
             fadeAnimation();
             addPoints();
         } else {
             deductPoints();
-            snackMessageId  = R.string.incorrect_answer;
+            snackMessageId = R.string.incorrect;
             shakeAnimation();
-
         }
-        Snackbar.make(binding.cardView, snackMessageId, Snackbar.LENGTH_SHORT).show();
+        Snackbar.make(binding.cardView, snackMessageId, Snackbar.LENGTH_SHORT)
+                .show();
+
     }
 
     private void updateCounter(ArrayList<Question> arrayList) {
@@ -127,6 +126,7 @@ public class MainActivity extends AppCompatActivity  {
 
     }
 
+
     private void getNextQuestion() {
         currentQuestionIndex = (currentQuestionIndex + 1) % questions.size();
         updateQuestion();
@@ -161,24 +161,25 @@ public class MainActivity extends AppCompatActivity  {
 
     }
 
-    private void addPoints() {
-        scoreCounter += 100;
-        score.setScore(scoreCounter);
-        Log.d("Score", "Score points: " + score.getScore());
-        binding.scoreText.setText(String.valueOf(score.getScore()));
-        binding.scoreText.setText(MessageFormat.format("Current score: {0}", String.valueOf(score.getScore())));
-    }
-
     private void deductPoints() {
         if(scoreCounter > 0) {
             scoreCounter -= 100;
             score.setScore(scoreCounter);
-            Log.d("Deduct2", "Loose points: " + score.getScore());
-            binding.scoreText.setText(MessageFormat.format("Current score: {0}", String.valueOf(score.getScore())));
+            binding.scoreText.setText(MessageFormat.format("Current score: {0}",
+                    String.valueOf(score.getScore())));
         } else {
             scoreCounter = 0;
             score.setScore(scoreCounter);
-            Log.d("Deduct", "Loose points: " + score.getScore());
         }
     }
+
+    private void addPoints() {
+        scoreCounter += 100;
+        score.setScore(scoreCounter);
+        binding.scoreText.setText(String.valueOf(score.getScore()));
+        binding.scoreText.setText(MessageFormat.format("Current score: {0}",
+                String.valueOf(score.getScore())));
+    }
+
+
 }
