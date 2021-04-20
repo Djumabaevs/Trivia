@@ -29,7 +29,7 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
     private int currentQuestionIndex = 0;
@@ -46,18 +46,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        AudioAttributes audioAttributes = new AudioAttributes.Builder()
-                .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
-                .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
-                .build();
-        soundPool = new SoundPool.Builder()
-                .setMaxStreams(2)
-                .setAudioAttributes(audioAttributes)
-                .build();
-
-        sound1 = soundPool.load(this, R.raw.correct, 1);
-        sound2 = soundPool.load(this, R.raw.complete, 1);
-
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
         score = new Score();
@@ -73,6 +61,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 updateCounter(listOfQuestions);
         });
 
+        AudioAttributes audioAttributes = new AudioAttributes.Builder()
+                .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
+                .build();
+        soundPool = new SoundPool.Builder()
+                .setMaxStreams(2)
+                .setAudioAttributes(audioAttributes)
+                .build();
+
+        sound1 = soundPool.load(this, R.raw.correct, 1);
+        sound2 = soundPool.load(this, R.raw.complete, 1);
+
         binding.buttonNext.setOnClickListener(view -> {
 
             getNextQuestion();
@@ -80,13 +80,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
 
         binding.buttonTrue.setOnClickListener(view -> {
-
+            soundPool.play(sound1, 1, 1, 0, 0, 1);
             checkAnswer(true);
             updateQuestion();
 
         });
         binding.buttonFalse.setOnClickListener(view -> {
-
+            soundPool.play(sound2, 1, 1, 0, 0, 1);
             checkAnswer(false);
             updateQuestion();
         });
@@ -106,7 +106,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         Snackbar.make(binding.cardView, snackMessageId, Snackbar.LENGTH_SHORT)
                 .show();
-
     }
 
     private void updateCounter(ArrayList<Question> arrayList) {
@@ -175,8 +174,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             }
         });
-
-
     }
 
     private void deductPoints() {
@@ -197,16 +194,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         binding.scoreText.setText(String.valueOf(score.getScore()));
         binding.scoreText.setText(MessageFormat.format("Current score: {0}",
                 String.valueOf(score.getScore())));
-    }
-
-
-    @Override
-    public void onClick(View v) {
-        if(R.id.button_true == v.getId()) {
-            soundPool.play(sound1, 1, 1, 0, 0, 1);
-        } else if (R.id.button_false == v.getId()) {
-            soundPool.play(sound2, 1, 1, 0, 0, 1);
-        }
-
     }
 }
