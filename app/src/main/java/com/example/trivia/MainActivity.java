@@ -58,8 +58,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         sound1 = soundPool.load(this, R.raw.correct, 1);
         sound2 = soundPool.load(this, R.raw.complete, 1);
 
-        onCli
-
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
         score = new Score();
@@ -145,10 +143,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             }
         });
-
-
     }
-
 
     private void getNextQuestion() {
         currentQuestionIndex = (currentQuestionIndex + 1) % questions.size();
