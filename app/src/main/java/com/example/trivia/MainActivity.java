@@ -29,12 +29,13 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity  {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ActivityMainBinding binding;
     private int currentQuestionIndex = 0;
     List<Question> questions;
     private SoundPool soundPool;
+    private int sound1, sound2;
 
     private int scoreCounter = 0;
     private Score score;
@@ -54,10 +55,15 @@ public class MainActivity extends AppCompatActivity  {
                 .setAudioAttributes(audioAttributes)
                 .build();
 
+        sound1 = soundPool.load(this, R.raw.correct, 1);
+        sound2 = soundPool.load(this, R.raw.complete, 1);
+
+        onCli
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
         score = new Score();
+
 
         binding.scoreText.setText(MessageFormat.format("Current score: {0}",
                 String.valueOf(score.getScore())));
@@ -199,4 +205,13 @@ public class MainActivity extends AppCompatActivity  {
     }
 
 
+    @Override
+    public void onClick(View v) {
+        if(R.id.button_true == v.getId()) {
+            soundPool.play(sound1, 1, 1, 0, 0, 1);
+        } else if (R.id.button_false == v.getId()) {
+            soundPool.play(sound2, 1, 1, 0, 0, 1);
+        }
+
+    }
 }
