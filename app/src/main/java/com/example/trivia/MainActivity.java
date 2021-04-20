@@ -4,6 +4,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.media.AudioAttributes;
 import android.media.MediaPlayer;
@@ -73,6 +74,12 @@ public class MainActivity extends AppCompatActivity {
         sound1 = soundPool.load(this, R.raw.correct, 1);
         sound2 = soundPool.load(this, R.raw.complete, 1);
 
+        binding.buttonSend.setOnClickListener(view -> {
+            Intent intent = new Intent(Intent.ACTION_SEND);
+            intent.setType("score");
+
+        });
+
         binding.buttonNext.setOnClickListener(view -> {
 
             getNextQuestion();
@@ -90,6 +97,19 @@ public class MainActivity extends AppCompatActivity {
             checkAnswer(false);
             updateQuestion();
         });
+
+        binding.buttonSend.setOnClickListener(view ->{
+            shareScore();
+        });
+    }
+
+    private void shareScore() {
+        String message = "My score is " + score.getScore() + " and my highest score is ";
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_SUBJECT, "Trivia game");
+        intent.putExtra(Intent.EXTRA_TEXT, message);
+        startActivity(intent);
     }
 
     private void checkAnswer(boolean userChoseCorrect) {

@@ -10,4 +10,5 @@
     <string name="button_next">Next</string>
     <string name="textQuestion">Question: %d/%d</string>
     <string name="text_view_make">Questions loading…</string>
+    <string name="send">SEND</string>
 </resources>
